@@ -1,0 +1,244 @@
+:root {
+  --primary: #2d88ff;
+  --nav-background: #242526;
+  --hover-button: #4b4c4f;
+}
+
+.NavbarItems {
+  background-color: var(--nav-background);
+  height: 55px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1.2rem;
+  border-bottom: 0.5px solid #33363a;
+}
+
+.navbar-logo {
+  color: #fff;
+  justify-self: start;
+  margin-left: 20px;
+  cursor: pointer;
+  transform: translate(14%, -14%);
+}
+
+.fa-react {
+  margin-left: 0.5rem;
+  font-size: 1.6rem;
+}
+
+.nav-menu {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  grid-gap: 10px;
+  list-style: none;
+  text-align: center;
+  width: 70vw;
+  justify-content: end;
+  margin-right: 2rem;
+}
+
+.nav-links {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+}
+
+.nav-links:hover {
+  background-color: #2d88ff;
+  border-radius: 4px;
+  transition: all 0.2s ease-out;
+}
+
+.nav-links-mobile {
+  display: none;
+}
+
+.menu-icon {
+  display: none;
+}
+/* Button,
+a {
+  text-decoration: none;
+} */
+
+@media screen and (max-width: 960px) {
+  /*max-width : ใหญ่ไม่เกิน 960px */
+  .NavbarItems {
+    position: relative;
+  }
+
+  .nav-menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 500px;
+    position: absolute;
+    top: 55px;
+    left: -100%;
+    opacity: 1;
+    transition: all 0.5s ease;
+  }
+
+  .nav-menu.active {
+    background-color: var(--nav-background);
+    left: 0;
+    opacity: 1;
+    transition: all 0.5s ease;
+    z-index: 1;
+  }
+
+  .nav-links {
+    text-align: center;
+    padding: 2rem;
+    width: 100%;
+    display: table;
+  }
+
+  .nav-links:hover {
+    background-color: #4b4c4f;
+    border-radius: 0;
+  }
+  .navbar-logo {
+    position: absolute;
+    top: 0;
+    left: 3rem;
+    transform: translate(25%, 50%); /* ย้ายตำแหน่ง x, y */
+  }
+
+  .menu-icon {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-100%, 60%);
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+  /* .fa-bars {
+    color: #fff;
+  } */
+  .fa-chevron-circle-down {
+    color: #fff;
+    width: 100%;
+    height: 25px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .fa-chevron-circle-down.action {
+    color: var(--primary);
+  }
+
+  /* .fa-times {
+    color: #fff;
+    font-size: 2rem;
+  } */
+
+  .nav-links-mobile {
+    display: block;
+    text-align: center;
+    padding: 1.5rem;
+    margin: 0.5rem auto;
+    border-radius: 4px;
+    width: 80%;
+    background-color: var(--primary);
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.5rem;
+  }
+
+  .nav-links-mobile:hover {
+    background-color: #fff;
+    color: var(--primary);
+    transition: 250ms;
+  }
+
+  Button {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1175px) {
+  .navbar-logo {
+    position: absolute;
+    top: 0;
+    left: 3rem;
+    transform: translate(25%, 20%); /* ย้ายตำแหน่ง x, y */
+  }
+}
+
+/* Sidebar */
+.navbar {
+  background-color: var(--nav-background);
+  height: 80px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.menu-bars {
+  margin-left: 2rem;
+  font-size: 2rem;
+  background: none;
+}
+
+.nav-menu2 {
+  background-color: var(--nav-background);
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  transition: 850ms;
+}
+
+.nav-menu2.active {
+  left: 0;
+  transition: 350ms;
+}
+
+.nav-text {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 8px 0px 8px 16px;
+  list-style: none; /* ลบเส้นใต้ลิ้ง */
+  height: 60px;
+}
+
+.nav-text a {
+  text-decoration: none;
+  color: #f5f5f5;
+  font-size: 18px;
+  width: 95%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-radius: 4px;
+}
+
+.nav-text a:hover {
+  background-color: #4b4c4f;
+}
+
+.nav-menu2-items {
+  width: 100%;
+}
+
+.navbar-toggle {
+  background-color: var(--nav-background);
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.span {
+  margin-left: 16px;
+}
