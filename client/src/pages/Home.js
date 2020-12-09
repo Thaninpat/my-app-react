@@ -1,50 +1,57 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { gql, useQuery } from '@apollo/client';
-import Moment from 'react-moment';
+import { Grid, Transition } from 'semantic-ui-react';
 
-const GET_USER = gql`
-  query getUsers {
-    viewUsers {
+import { AuthContext } from '../context/auth';
+import PostCard from '../components/PostCard';
+import PostForm from '../components/PostForm';
+// import { FETCH_POSTS_QUERY } from '../util/graphql';
+
+function Home() {
+  const { user } = useContext(AuthContext);
+  const {
+    loading,
+    data: { getPosts: posts },
+  } = useQuery(FETCH_POSTS_QUERY);
+
+  return (
+    <Grid columns={3}>
+      <Grid.Row className='page-title'>
+        <h1>Recent Posts</h1>
+      </Grid.Row>
+      <Grid.Row>
+        {user && (
+          <Grid.Column>
+            <PostForm />
+          </Grid.Column>
+        )}
+        {loading ? (
+          <h1>Loading posts..</h1>
+        ) : (
+          <Transition.Group>
+            {posts &&
+              posts.map((post) => (
+                <Grid.Column key={post.id} style={{ marginBottom: 20 }}>
+                  <PostCard post={post} />
+                </Grid.Column>
+              ))}
+          </Transition.Group>
+        )}
+      </Grid.Row>
+    </Grid>
+  );
+}
+
+const FETCH_POSTS_QUERY = gql`
+  {
+    getPosts {
       id
-      email
-      username
-      password
+      body
       createdAt
+      username
+      likeCount
     }
   }
 `;
-
-function Home() {
-  const { loading, error, data } = useQuery(GET_USER);
-  const [count, setCount] = useState(0);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
-
-  return (
-    <div className='home'>
-      <table>
-        <thead>
-          <tr>
-            <th>email</th>
-            <th>username</th>
-            <th>createdAt</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.viewUsers.map((user) => (
-            <tr key={user.id}>
-              <td>{user.email}</td>
-              <td>{user.username}</td>
-              <td>
-                <Moment format='DD-MM-YYYY HH:mm'>{user.createdAt}</Moment>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
 
 export default Home;
